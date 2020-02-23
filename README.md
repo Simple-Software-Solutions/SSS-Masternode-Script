@@ -1,1 +1,1 @@
-SSS Masternode Install Script
+SSS Auto Masternode Script
