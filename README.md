@@ -1,8 +1,8 @@
-<b>SSS Auto Masternode Script<b>
+<b>SSS Auto Masternode Script</b>
   
-Read documentation: https://docs.sssolutions.io
+Read documentation: 
 
-Add Nodes List
+<b>Add Nodes List</b>
 
 addnode=76.30.247.15</br>
 addnode=162.212.156.128</br>
