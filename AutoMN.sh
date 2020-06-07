@@ -1,6 +1,6 @@
 #!/bin/bash
 TMP_FOLDER=$(mktemp -d)
-CONFIG_FILE='sssolutions.conf'
+CONFIG_FILE='sss.conf'
 CONFIGFOLDER='/root/.sssolutions'
 COIN_DAEMON='sssolutionsd'
 COIN_CLI='sssolutions-cli'
