@@ -103,7 +103,6 @@ rpcallowip=127.0.0.1
 listen=1
 server=1
 daemon=1
-port=$COIN_PORT
 EOF
 }
 
@@ -133,10 +132,10 @@ function update_config() {
   sed -i 's/daemon=1/daemon=0/' $CONFIGFOLDER/$CONFIG_FILE
   cat << EOF >> $CONFIGFOLDER/$CONFIG_FILE
 logintimestamps=1
-maxconnections=65
-#bind=$NODEIP
 masternode=1
+maxconnections=256
 externalip=$NODEIP:$COIN_PORT
+masternodeaddr=$NODEIP:$COIN_PORT
 masternodeprivkey=$COINKEY
 EOF
 }
@@ -202,16 +201,15 @@ echo -e "Preparing the VPS to setup. ${CYAN}$COIN_NAME${NC} ${RED}Masternode${NC
 apt-get update >/dev/null 2>&1
 DEBIAN_FRONTEND=noninteractive apt-get update > /dev/null 2>&1
 DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y -qq upgrade >/dev/null 2>&1
-apt install -y software-properties-common >/dev/null 2>&1
-echo -e "${PURPLE}Adding bitcoin PPA repository"
-apt-add-repository -y ppa:bitcoin/bitcoin >/dev/null 2>&1
-echo -e "Installing required packages, it may take some time to finish.${NC}"
-apt-get update >/dev/null 2>&1
-apt-get install libzmq3-dev -y >/dev/null 2>&1
-apt-get install -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" make software-properties-common \
-build-essential libtool autoconf libssl1.0-dev  libboost-dev libboost-chrono-dev libboost-filesystem-dev libboost-program-options-dev \
-libboost-system-dev libboost-test-dev libboost-thread-dev sudo automake git wget curl libdb4.8-dev bsdmainutils libdb4.8++-dev \
-libminiupnpc-dev libgmp3-dev ufw pkg-config libevent-dev net-tools libdb5.3++ unzip libzmq5 >/dev/null 2>&1
+#apt install -y software-properties-common >/dev/null 2>&1
+#echo -e "${PURPLE}Adding bitcoin PPA repository"
+#apt-add-repository -y ppa:bitcoin/bitcoin >/dev/null 2>&1
+#echo -e "Installing required packages, it may take some time to finish.${NC}"
+#apt-get update >/dev/null 2>&1
+#apt-get install -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" make software-properties-common \
+#build-essential libtool autoconf libssl1.0-dev  libboost-dev libboost-chrono-dev libboost-filesystem-dev libboost-program-options-dev \
+#libboost-system-dev libboost-test-dev libboost-thread-dev sudo automake git wget curl libdb4.8-dev bsdmainutils libdb4.8++-dev \
+#libminiupnpc-dev libgmp3-dev ufw pkg-config libevent-dev net-tools libdb5.3++ unzip libzmq5 >/dev/null 2>&1
 if [ "$?" -gt "0" ];
   then
     echo -e "${RED}Not all required packages were installed properly. Try to install them manually by running the following commands:${NC}\n"
